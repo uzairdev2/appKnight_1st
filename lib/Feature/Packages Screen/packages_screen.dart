@@ -17,6 +17,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Card(
+        color: Colors.grey[800],
         child: Padding(
           padding: const EdgeInsets.all(100.0),
           child: Column(
