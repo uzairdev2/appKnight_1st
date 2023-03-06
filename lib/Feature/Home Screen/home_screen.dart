@@ -39,9 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, currentScreen, child) {
           switch (currentScreen.currentIndex) {
             case 0:
-              return const PatternsScreen();
-            case 1:
               return const PackagesScreen();
+            case 1:
+              return const PatternsScreen();
             case 2:
               return const AboutScreen();
             default:

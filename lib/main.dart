@@ -1,9 +1,11 @@
 import 'package:black_belt/Core/Provider/icon_state.dart';
+import 'package:black_belt/Feature/Home%20Screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import 'Core/Provider/card_btn_provieder.dart';
 import 'Core/Provider/drawer_provider.dart';
 import 'Core/Provider/vidoeplayprovider.dart';
 import 'Feature/VideoPlayerScreen/video_screen_new.dart';
@@ -38,6 +40,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => IconState(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => DownloadProvider(),
+        ),
       ],
       // Screen_util initialization
       child: ScreenUtilInit(
@@ -49,7 +54,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Black Belt',
             //Calling Screen
-            home: VideoScreen(),
+            home: HomeScreen(),
           );
         },
       ),

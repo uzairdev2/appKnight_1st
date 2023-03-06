@@ -39,9 +39,14 @@ dependencies:
   video_player:
   chewie:
   provider:
-  pausable_timer: ^1.0.0+6
-  csv: ^5.0.1
-  native_video_player: ^1.2.0+3
+  pausable_timer:
+  csv:
+  native_video_player:
+  hive:
+  hive_flutter:
+  firebase_storage:
+  path_provider:
+  dio:
 
 dev_dependencies:
   flutter_test:

@@ -7,19 +7,17 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.grey[800],
       child: ListView(
         children: [
           ListTile(
-            title: const Text('Patterns'),
-            selectedTileColor: Colors.grey,
-            onTap: () {
-              context.read<CurrentScreen>().updateCurrentIndex(0);
-              Navigator.pop(context);
-            },
-            selected: context.watch<CurrentScreen>().currentIndex == 0,
-          ),
-          ListTile(
-            title: const Text('Packages'),
+            title: const Text(
+              'Patterns',
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: "MuseoSans-500",
+              ),
+            ),
             selectedTileColor: Colors.grey,
             onTap: () {
               context.read<CurrentScreen>().updateCurrentIndex(1);
@@ -28,7 +26,28 @@ class MyDrawer extends StatelessWidget {
             selected: context.watch<CurrentScreen>().currentIndex == 1,
           ),
           ListTile(
-            title: const Text('About'),
+            title: const Text(
+              'Packages',
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: "MuseoSans-500",
+              ),
+            ),
+            selectedTileColor: Colors.grey,
+            onTap: () {
+              context.read<CurrentScreen>().updateCurrentIndex(0);
+              Navigator.pop(context);
+            },
+            selected: context.watch<CurrentScreen>().currentIndex == 0,
+          ),
+          ListTile(
+            title: const Text(
+              'About',
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: "MuseoSans-500",
+              ),
+            ),
             selectedTileColor: Colors.grey,
             onTap: () {
               context.read<CurrentScreen>().updateCurrentIndex(2);
