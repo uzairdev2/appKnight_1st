@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
@@ -16,7 +17,9 @@ import 'Custom_ListTile.dart';
 import 'Custom_RadioBTN.dart';
 
 class VideoScreen extends StatefulWidget {
-  const VideoScreen({super.key});
+  VideoScreen({this.videopath = "assets/videos/video0.mp4", super.key});
+
+  String videopath;
 
   @override
   State<VideoScreen> createState() => _VideoScreenState();
@@ -33,12 +36,11 @@ class _VideoScreenState extends State<VideoScreen> {
 
     //  videoPlayerModel =
     final controller = Provider.of<VideoPlayerProvider>(context, listen: false);
-    controller.controller =
-        VideoPlayerController.asset(controller.currentVideoAssetPath)
-          ..initialize().then((_) {
-            controller.controller.addListener(() => setState(() {}));
-            setState(() {});
-          });
+    controller.controller = VideoPlayerController.asset(widget.videopath)
+      ..initialize().then((_) {
+        controller.controller.addListener(() => setState(() {}));
+        setState(() {});
+      });
     CsvService().processCsv().then((value) {
       for (int i = 1; i < value.length; i++) {
         List temp = value[i][0].split(";");
@@ -150,24 +152,34 @@ class _VideoScreenState extends State<VideoScreen> {
               ),
               children: [
                 CustomListTile(
-                  onTap: () {
-                    // videoProvider.changeVideo("assets/videos/Sjirugi1.mp4");
-                  },
                   text: "Front",
-                ),
-                CustomListTile(
                   onTap: () {
-                    // videoProvider.changeVideo("assets/videos/Sjirugi2.mp4");
+                    videoProvider.changeVideo("assets/videos/video1.mp4");
+                    // Get.to(() => VideoScreen(
+                    //       videopath: "assets/videos/video1.mp4",
+                    //     ));
                   },
+                ),
+                CustomListTile(
                   text: "Back",
+                  onTap: () {
+                    videoProvider.changeVideo("assets/videos/video2.mp4");
+                    // Get.to(() => VideoScreen(
+                    //       videopath: "assets/videos/video2.mp4",
+                    //     ));
+                  },
                 ),
                 CustomListTile(
-                  onTap: () {},
                   text: "Left",
+                  onTap: () {
+                    videoProvider.changeVideo("assets/videos/video3.mp4");
+                  },
                 ),
                 CustomListTile(
-                  onTap: () {},
                   text: "Right",
+                  onTap: () {
+                    videoProvider.changeVideo("assets/videos/video4.mp4");
+                  },
                 )
               ],
             ),

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "645523698429",
+    "project_id": "downloader-17559",
+    "storage_bucket": "downloader-17559.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645523698429:android:220feefc3a4c224dc30494",
+        "android_client_info": {
+          "package_name": "com.appsknight.black_belt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "645523698429-d0qpq7qvq1de6h01d2ns5fdndbf5iocm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnUG4rJtlpn-XfTJCFP_djPkQi6Y9rXqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "645523698429-d0qpq7qvq1de6h01d2ns5fdndbf5iocm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

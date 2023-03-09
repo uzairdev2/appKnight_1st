@@ -1,16 +1,19 @@
 import 'package:black_belt/Core/Provider/icon_state.dart';
-import 'package:black_belt/Feature/Home%20Screen/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'Core/Provider/card_btn_provieder.dart';
 import 'Core/Provider/drawer_provider.dart';
 import 'Core/Provider/vidoeplayprovider.dart';
-import 'Feature/VideoPlayerScreen/video_screen_new.dart';
+import 'Feature/Downloader/downloader.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -50,11 +53,12 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return const MaterialApp(
+          return const GetMaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Black Belt',
             //Calling Screen
-            home: HomeScreen(),
+            // home: HomeScreen(),
+            home: MyVideoDownloader(),
           );
         },
       ),

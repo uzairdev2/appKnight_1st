@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:black_belt/Feature/VideoPlayerScreen/video_screen_new.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 import '../Models/step_model.dart';
@@ -95,6 +97,33 @@ class VideoPlayerProvider extends ChangeNotifier {
 
   void changeVideo(String newVideoAssetPath) {
     _currentVideoAssetPath = newVideoAssetPath;
-    notifyListeners();
+    log("here is new video $newVideoAssetPath");
+    log("here is new video 222 $_currentVideoAssetPath");
+    // currentVideoAssetPath == "assets/videos/video1.mp4"
+    //     ? Get.to(() => VideoScreen(
+    //           videopath: _currentVideoAssetPath,
+    //         ))
+    //     : currentVideoAssetPath == "assets/videos/video2.mp4"
+    //         ? Get.off(VideoScreen(
+    //             videopath: _currentVideoAssetPath,
+    //           ))
+    //         : Get.offAll(VideoScreen(
+    //             videopath: _currentVideoAssetPath,
+    //           ));
+    // notifyListeners();
+    if (currentVideoAssetPath == "assets/videos/video1.mp4") {
+      Get.to(() => VideoScreen(videopath: currentVideoAssetPath));
+    } else if (currentVideoAssetPath == "assets/videos/video2.mp4") {
+      Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
+    } else if (currentVideoAssetPath == "assets/videos/video3.mp4") {
+      Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
+    } else if (currentVideoAssetPath == "assets/videos/video4.mp4") {
+      Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
+    } else {
+      // Handle the case where the value of currentVideoAssetPath is not one of the four videos
+      Get.to(() => VideoScreen(
+            videopath: "assets/videos/video0.mp4",
+          ));
+    }
   }
 }

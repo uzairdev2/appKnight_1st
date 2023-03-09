@@ -42,11 +42,14 @@ dependencies:
   pausable_timer:
   csv:
   native_video_player:
-  hive:
-  hive_flutter:
-  firebase_storage:
-  path_provider:
   dio:
+  get:
+  # Using by Uzair
+  http:
+  firebase_storage:
+  firebase_core:
+  path_provider:
+
 
 dev_dependencies:
   flutter_test:
