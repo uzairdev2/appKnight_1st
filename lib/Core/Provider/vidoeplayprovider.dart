@@ -112,17 +112,17 @@ class VideoPlayerProvider extends ChangeNotifier {
     //           ));
     // notifyListeners();
     if (currentVideoAssetPath == "assets/videos/video1.mp4") {
-      Get.to(() => VideoScreen(videopath: currentVideoAssetPath));
+      // Get.to(() => VideoScreen(videopath: currentVideoAssetPath));
     } else if (currentVideoAssetPath == "assets/videos/video2.mp4") {
-      Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
+      // Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
     } else if (currentVideoAssetPath == "assets/videos/video3.mp4") {
-      Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
+      // Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
     } else if (currentVideoAssetPath == "assets/videos/video4.mp4") {
-      Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
+      // Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
     } else {
       // Handle the case where the value of currentVideoAssetPath is not one of the four videos
       Get.to(() => VideoScreen(
-            videopath: "assets/videos/video0.mp4",
+          // videopath: "assets/videos/video0.mp4",
           ));
     }
   }

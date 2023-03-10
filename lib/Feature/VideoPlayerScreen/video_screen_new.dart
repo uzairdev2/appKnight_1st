@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import '../../Core/Common SizedBoxes/custom_sizedbox.dart';
 import '../../Core/Constants/constants.dart';
@@ -17,9 +18,12 @@ import 'Custom_ListTile.dart';
 import 'Custom_RadioBTN.dart';
 
 class VideoScreen extends StatefulWidget {
-  VideoScreen({this.videopath = "assets/videos/video0.mp4", super.key});
+  VideoScreen({
+    // this.videopath = "assets/videos/video0.mp4",
+    super.key,
+  });
 
-  String videopath;
+  // String videopath;
 
   @override
   State<VideoScreen> createState() => _VideoScreenState();
@@ -31,12 +35,18 @@ class _VideoScreenState extends State<VideoScreen> {
   // final String? videoPlayerModel ;
 
   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
+
+  @override
   void initState() {
     super.initState();
 
     //  videoPlayerModel =
     final controller = Provider.of<VideoPlayerProvider>(context, listen: false);
-    controller.controller = VideoPlayerController.asset(widget.videopath)
+    controller.controller = VideoPlayerController.asset("")
       ..initialize().then((_) {
         controller.controller.addListener(() => setState(() {}));
         setState(() {});

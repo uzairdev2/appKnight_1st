@@ -49,6 +49,7 @@ dependencies:
   firebase_storage:
   firebase_core:
   path_provider:
+  flutter_cache_manager:
 
 
 dev_dependencies:
