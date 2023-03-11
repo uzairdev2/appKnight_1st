@@ -46,7 +46,8 @@ class _VideoScreenState extends State<VideoScreen> {
 
     //  videoPlayerModel =
     final controller = Provider.of<VideoPlayerProvider>(context, listen: false);
-    controller.controller = VideoPlayerController.asset("")
+    controller.controller = VideoPlayerController.asset(
+        '/data/user/0/com.appsknight.black_belt/app_flutter/video1.mp4')
       ..initialize().then((_) {
         controller.controller.addListener(() => setState(() {}));
         setState(() {});
