@@ -121,9 +121,9 @@ class VideoPlayerProvider extends ChangeNotifier {
       // Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
     } else {
       // Handle the case where the value of currentVideoAssetPath is not one of the four videos
-      Get.to(() => VideoScreen(
-          // videopath: "assets/videos/video0.mp4",
-          ));
+      // Get.to(() => VideoScreen(
+      //     // videopath: "assets/videos/video0.mp4",
+      //     ));
     }
   }
 }

@@ -37,13 +37,13 @@ class _PackagesScreenState extends State<PackagesScreen> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return VideoScreen();
-                                },
-                              ),
-                            );
+                            // Navigator.of(context).push(
+                            //   MaterialPageRoute(
+                            //     builder: (context) {
+                            //       return VideoScreen();
+                            //     },
+                            //   ),
+                            // );
                           },
                           child: const Text('Open'),
                         ),

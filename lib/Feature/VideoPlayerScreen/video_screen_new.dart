@@ -19,11 +19,8 @@ import 'Custom_RadioBTN.dart';
 
 class VideoScreen extends StatefulWidget {
   VideoScreen({
-    // this.videopath = "assets/videos/video0.mp4",
     super.key,
   });
-
-  // String videopath;
 
   @override
   State<VideoScreen> createState() => _VideoScreenState();

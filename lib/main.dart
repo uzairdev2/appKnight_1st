@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'Core/Provider/card_btn_provieder.dart';
 import 'Core/Provider/drawer_provider.dart';
 import 'Core/Provider/vidoeplayprovider.dart';
-import 'Feature/Downloader/downloader.dart';
+import 'Feature/Testing/VideoScreen.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,12 +53,11 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return const GetMaterialApp(
+          return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Black Belt',
             //Calling Screen
-            // home: HomeScreen(),
-            home: MyVideoDownloader(),
+            home: VideosScreen(),
           );
         },
       ),
