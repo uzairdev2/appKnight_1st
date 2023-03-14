@@ -50,6 +50,7 @@ dependencies:
   firebase_core:
   path_provider:
   flutter_cache_manager:
+  shared_preferences:
 
 
 dev_dependencies:

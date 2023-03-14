@@ -62,8 +62,9 @@ class _VideosScreenState extends State<VideosScreen> {
 
   Future<void> _playVideo(VideoItem videoItem) async {
     final VideoPlayerController controller =
-        VideoPlayerController.file(File(videoItem.url));
-    await controller.initialize();
+        VideoPlayerController.file(File(videoItem.url))
+          ..addListener(() => setState(() {}));
+    await controller.initialize().then((_) => controller.play());
     await Navigator.of(context).push(MaterialPageRoute(
       builder: (_) => Scaffold(
         body: Center(
