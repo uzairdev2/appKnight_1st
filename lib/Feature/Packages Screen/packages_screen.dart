@@ -1,9 +1,11 @@
 import 'package:black_belt/Core/Common%20SizedBoxes/custom_sizedbox.dart';
-import 'package:black_belt/Feature/VideoPlayerScreen/video_screen_new.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 
 import '../../Core/Provider/card_btn_provieder.dart';
+import 'VideosList_Screen.dart';
 
 class PackagesScreen extends StatefulWidget {
   const PackagesScreen({super.key});
@@ -32,40 +34,19 @@ class _PackagesScreenState extends State<PackagesScreen> {
                       child: CircularProgressIndicator(),
                     );
                   } else if (downloadProvider.downloaded) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            // Navigator.of(context).push(
-                            //   MaterialPageRoute(
-                            //     builder: (context) {
-                            //       return VideoScreen();
-                            //     },
-                            //   ),
-                            // );
-                          },
-                          child: const Text('Open'),
-                        ),
-                        const SizedBox(
-                          width: 100,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            downloadProvider.reset();
-                          },
-                          child: Text('Delete'),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.red,
-                          ),
-                        ),
-                      ],
+                    return Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Get.to(() => VideosListScreen());
+                        },
+                        child: const Text('Open'),
+                      ),
                     );
                   } else {
                     return Center(
                       child: ElevatedButton(
                         onPressed: () {
-                          downloadProvider.startDownload();
+                          downloadProvider.downloadVideos();
                         },
                         child: const Text('Download'),
                       ),

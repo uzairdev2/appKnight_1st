@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'Core/Provider/card_btn_provieder.dart';
 import 'Core/Provider/drawer_provider.dart';
 import 'Core/Provider/vidoeplayprovider.dart';
+import 'Feature/Splash Screen/splash_screen.dart';
 import 'Feature/Testing/VideoScreen.dart';
 
 Future main() async {
@@ -46,6 +47,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => DownloadProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => VideoProvider(),
+        ),
       ],
       // Screen_util initialization
       child: ScreenUtilInit(
@@ -57,7 +61,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Black Belt',
             //Calling Screen
-            home: VideosScreen(),
+            home: SplashScreen(),
           );
         },
       ),
