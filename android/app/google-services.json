@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "917710927839",
-    "project_id": "appsknight-ea5e4",
-    "storage_bucket": "appsknight-ea5e4.appspot.com"
+    "project_number": "547452610043",
+    "project_id": "appsk-577a3",
+    "storage_bucket": "appsk-577a3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:917710927839:android:af54a1c66e47d6e1fd766a",
+        "mobilesdk_app_id": "1:547452610043:android:d58b5c57e138c6c2c3575e",
         "android_client_info": {
           "package_name": "com.appsknight.black_belt"
         }
       },
       "oauth_client": [
         {
-          "client_id": "917710927839-mhin1frq2jfvn2prjj39nf5lqbkfub32.apps.googleusercontent.com",
+          "client_id": "547452610043-ppckaqmvbql4nf1oqmcks8askobi76b7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDjAhQHZeTM6FjaNgCB03LlzVM4-lhaAdk"
+          "current_key": "AIzaSyDy0WRzbXNCW-PC1VKFrYsCv4GsaYMr5Wg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "917710927839-mhin1frq2jfvn2prjj39nf5lqbkfub32.apps.googleusercontent.com",
+              "client_id": "547452610043-ppckaqmvbql4nf1oqmcks8askobi76b7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

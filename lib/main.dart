@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import 'Core/Provider/card_btn_provieder.dart';
 import 'Core/Provider/drawer_provider.dart';
 import 'Core/Provider/vidoeplayprovider.dart';
 import 'Feature/Splash Screen/splash_screen.dart';
@@ -43,9 +42,6 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => IconState(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => DownloadProvider(),
         ),
         ChangeNotifierProvider(
           create: (_) => VideoProvider(),

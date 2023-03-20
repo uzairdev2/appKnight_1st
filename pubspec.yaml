@@ -51,6 +51,8 @@ dependencies:
   path_provider:
   flutter_cache_manager:
   shared_preferences:
+  dependencies:
+  fluttertoast:
 
 
 dev_dependencies:

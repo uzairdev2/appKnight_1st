@@ -1,12 +1,10 @@
-import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import '../../Core/Common SizedBoxes/custom_sizedbox.dart';
 import '../../Core/Constants/constants.dart';
@@ -18,7 +16,10 @@ import 'Custom_ListTile.dart';
 import 'Custom_RadioBTN.dart';
 
 class VideoScreen extends StatefulWidget {
+  final String videoUrl;
+
   VideoScreen({
+    required this.videoUrl,
     super.key,
   });
 
@@ -27,28 +28,24 @@ class VideoScreen extends StatefulWidget {
 }
 
 class _VideoScreenState extends State<VideoScreen> {
-  // late VideoPlayerController videoPlayerModel.controller;
-
-  // final String? videoPlayerModel ;
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
-
   @override
   void initState() {
     super.initState();
 
-    //  videoPlayerModel =
     final controller = Provider.of<VideoPlayerProvider>(context, listen: false);
-    controller.controller = VideoPlayerController.asset(
-        '/data/user/0/com.appsknight.black_belt/app_flutter/video1.mp4')
+
+    controller.controller = VideoPlayerController.file(File(widget.videoUrl))
       ..initialize().then((_) {
         controller.controller.addListener(() => setState(() {}));
         setState(() {});
       });
+    @override
+    void dispose() {
+      super.dispose();
+      controller.controller.pause();
+      controller.controller.dispose();
+    }
+
     CsvService().processCsv().then((value) {
       for (int i = 1; i < value.length; i++) {
         List temp = value[i][0].split(";");
@@ -62,13 +59,6 @@ class _VideoScreenState extends State<VideoScreen> {
         );
       }
     });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    // timer = null;
-    // videoPlayerModel.controller.dispose();
   }
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -161,33 +151,19 @@ class _VideoScreenState extends State<VideoScreen> {
               children: [
                 CustomListTile(
                   text: "Front",
-                  onTap: () {
-                    videoProvider.changeVideo("assets/videos/video1.mp4");
-                    // Get.to(() => VideoScreen(
-                    //       videopath: "assets/videos/video1.mp4",
-                    //     ));
-                  },
+                  onTap: () {},
                 ),
                 CustomListTile(
                   text: "Back",
-                  onTap: () {
-                    videoProvider.changeVideo("assets/videos/video2.mp4");
-                    // Get.to(() => VideoScreen(
-                    //       videopath: "assets/videos/video2.mp4",
-                    //     ));
-                  },
+                  onTap: () {},
                 ),
                 CustomListTile(
                   text: "Left",
-                  onTap: () {
-                    videoProvider.changeVideo("assets/videos/video3.mp4");
-                  },
+                  onTap: () {},
                 ),
                 CustomListTile(
                   text: "Right",
-                  onTap: () {
-                    videoProvider.changeVideo("assets/videos/video4.mp4");
-                  },
+                  onTap: () {},
                 )
               ],
             ),
@@ -478,7 +454,9 @@ class _VideoScreenState extends State<VideoScreen> {
                         child: Row(
                           children: [
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
                               child: const Icon(
                                 Icons.arrow_back_ios,
                                 color: Colors.red,

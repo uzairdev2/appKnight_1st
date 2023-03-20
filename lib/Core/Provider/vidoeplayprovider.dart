@@ -1,14 +1,23 @@
 import 'dart:async';
 import 'dart:developer';
-
-import 'package:black_belt/Feature/VideoPlayerScreen/video_screen_new.dart';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 
 import '../Models/step_model.dart';
 
+// This Class are use for the Downloading and Storing video
+class VideoItem {
+  final String name;
+  final String url;
+  VideoItem({required this.name, required this.url});
+}
+
 class VideoPlayerProvider extends ChangeNotifier {
+  // to set the player custom
   bool showText = true;
   late VideoPlayerController controller;
   bool stop = false;
@@ -84,6 +93,7 @@ class VideoPlayerProvider extends ChangeNotifier {
   resetTimer() {
     timer?.cancel();
     timer = null;
+    notifyListeners();
   }
 
   visable() {
@@ -91,39 +101,84 @@ class VideoPlayerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _currentVideoAssetPath = 'assets/videos/video2.mp4';
+  // Use for the videos Dawnloading from firbase and store it in loccl
+  // After Local store it in SharedPrefernces and play them
+  List<VideoItem> _videos = [];
 
-  String get currentVideoAssetPath => _currentVideoAssetPath;
+  List<VideoItem> get videos => _videos;
 
-  void changeVideo(String newVideoAssetPath) {
-    _currentVideoAssetPath = newVideoAssetPath;
-    log("here is new video $newVideoAssetPath");
-    log("here is new video 222 $_currentVideoAssetPath");
-    // currentVideoAssetPath == "assets/videos/video1.mp4"
-    //     ? Get.to(() => VideoScreen(
-    //           videopath: _currentVideoAssetPath,
-    //         ))
-    //     : currentVideoAssetPath == "assets/videos/video2.mp4"
-    //         ? Get.off(VideoScreen(
-    //             videopath: _currentVideoAssetPath,
-    //           ))
-    //         : Get.offAll(VideoScreen(
-    //             videopath: _currentVideoAssetPath,
-    //           ));
-    // notifyListeners();
-    if (currentVideoAssetPath == "assets/videos/video1.mp4") {
-      // Get.to(() => VideoScreen(videopath: currentVideoAssetPath));
-    } else if (currentVideoAssetPath == "assets/videos/video2.mp4") {
-      // Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
-    } else if (currentVideoAssetPath == "assets/videos/video3.mp4") {
-      // Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
-    } else if (currentVideoAssetPath == "assets/videos/video4.mp4") {
-      // Get.offAll(() => VideoScreen(videopath: currentVideoAssetPath));
-    } else {
-      // Handle the case where the value of currentVideoAssetPath is not one of the four videos
-      // Get.to(() => VideoScreen(
-      //     // videopath: "assets/videos/video0.mp4",
-      //     ));
+  bool _downloading = false;
+  bool _downloaded = false;
+
+  bool get downloading => _downloading;
+  bool get downloaded => _downloaded;
+
+  // Storing in Shared-Preferences
+  void loadVideos() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? videoPaths = prefs.getStringList('video_paths');
+    if (videoPaths != null) {
+      _videos = videoPaths
+          .map((path) =>
+              VideoItem(name: File(path).path.split('/').last, url: path))
+          .toList();
+      _downloaded = true; // set the downloaded flag to true
     }
+    notifyListeners();
+  }
+
+  void saveVideos() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> videoPaths = _videos.map((v) => v.url).toList();
+    prefs.setStringList('video_paths', videoPaths);
+  }
+
+  // When Download Button was Clicked
+  Future<void> downloadVideos() async {
+    _downloading = true;
+    notifyListeners();
+    final Directory directory = await getApplicationDocumentsDirectory();
+
+    final FirebaseStorage storage = FirebaseStorage.instance;
+    final ListResult result = await storage.ref().child('videos/').listAll();
+
+    for (final ref in result.items) {
+      final file = File('${directory.path}/${ref.name}');
+      if (!await file.exists()) {
+        await ref.writeToFile(file);
+      }
+      print(file);
+      final videoItem = VideoItem(name: ref.name, url: file.path);
+      if (!_videos.contains(videoItem)) {
+        _videos.add(videoItem);
+      }
+    }
+    saveVideos();
+    _downloading = false;
+    _downloaded = true;
+    notifyListeners();
+  }
+
+  // When Delete Button was Clicked
+  Future<void> deleteVideos() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Delete videos from storage
+    for (final video in _videos) {
+      final file = File(video.url);
+      if (await file.exists()) {
+        await file.delete();
+      }
+    }
+
+    // Clear the videos list and set _downloaded to false
+    _videos.clear();
+    _downloaded = false;
+
+    // Remove video_paths key from SharedPreferences
+    await prefs.remove('video_paths');
+
+    // Notify listeners to show the download button again
+    notifyListeners();
   }
 }
