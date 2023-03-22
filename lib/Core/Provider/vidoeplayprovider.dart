@@ -137,31 +137,6 @@ class VideoPlayerProvider extends ChangeNotifier {
   }
 
   // // When Download Button was Clicked
-  // Future<void> downloadVideos() async {
-  //   _downloading = true;
-  //   notifyListeners();
-  //   final Directory directory = await getApplicationDocumentsDirectory();
-
-  //   final FirebaseStorage storage = FirebaseStorage.instance;
-  //   final ListResult result = await storage.ref().child('videos/').listAll();
-
-  //   for (final ref in result.items) {
-  //     final file = File('${directory.path}/${ref.name}');
-  //     if (!await file.exists()) {
-  //       await ref.writeToFile(file);
-  //     }
-  //     print(file);
-  //     final videoItem = VideoItem(name: ref.name, url: file.path);
-  //     if (!_videos.contains(videoItem)) {
-  //       _videos.add(videoItem);
-  //     }
-  //   }
-  //   saveVideos();
-  //   _downloading = false;
-  //   _downloaded = true;
-  //   notifyListeners();
-  // }
-
   Future<void> downloadVideos() async {
     _downloading = true;
     _downloadProgress = 0.0; // initialize download progress
