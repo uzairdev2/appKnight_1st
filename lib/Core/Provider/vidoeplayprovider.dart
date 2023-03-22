@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
@@ -109,11 +110,13 @@ class VideoPlayerProvider extends ChangeNotifier {
 
   bool _downloading = false;
   bool _downloaded = false;
+  double _downloadProgress = 0.0;
 
+  double get downloadProgress => _downloadProgress;
   bool get downloading => _downloading;
   bool get downloaded => _downloaded;
 
-  // Storing in Shared-Preferences
+  // When App is Launched
   void loadVideos() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? videoPaths = prefs.getStringList('video_paths');
@@ -133,9 +136,35 @@ class VideoPlayerProvider extends ChangeNotifier {
     prefs.setStringList('video_paths', videoPaths);
   }
 
-  // When Download Button was Clicked
+  // // When Download Button was Clicked
+  // Future<void> downloadVideos() async {
+  //   _downloading = true;
+  //   notifyListeners();
+  //   final Directory directory = await getApplicationDocumentsDirectory();
+
+  //   final FirebaseStorage storage = FirebaseStorage.instance;
+  //   final ListResult result = await storage.ref().child('videos/').listAll();
+
+  //   for (final ref in result.items) {
+  //     final file = File('${directory.path}/${ref.name}');
+  //     if (!await file.exists()) {
+  //       await ref.writeToFile(file);
+  //     }
+  //     print(file);
+  //     final videoItem = VideoItem(name: ref.name, url: file.path);
+  //     if (!_videos.contains(videoItem)) {
+  //       _videos.add(videoItem);
+  //     }
+  //   }
+  //   saveVideos();
+  //   _downloading = false;
+  //   _downloaded = true;
+  //   notifyListeners();
+  // }
+
   Future<void> downloadVideos() async {
     _downloading = true;
+    _downloadProgress = 0.0; // initialize download progress
     notifyListeners();
     final Directory directory = await getApplicationDocumentsDirectory();
 
@@ -145,7 +174,20 @@ class VideoPlayerProvider extends ChangeNotifier {
     for (final ref in result.items) {
       final file = File('${directory.path}/${ref.name}');
       if (!await file.exists()) {
-        await ref.writeToFile(file);
+        final task = ref.writeToFile(file);
+        // Add a progress listener for the task
+        task.snapshotEvents.listen((TaskSnapshot snapshot) {
+          _downloadProgress = snapshot.bytesTransferred / (1024 * 1024);
+          notifyListeners();
+        });
+        await task;
+        Fluttertoast.showToast(
+          msg: '${ref.name} downloaded',
+          toastLength: Toast.LENGTH_LONG,
+          textColor: Colors.white,
+          gravity: ToastGravity.TOP,
+          backgroundColor: Colors.blue,
+        ); // show toast message
       }
       print(file);
       final videoItem = VideoItem(name: ref.name, url: file.path);
@@ -156,6 +198,7 @@ class VideoPlayerProvider extends ChangeNotifier {
     saveVideos();
     _downloading = false;
     _downloaded = true;
+    _downloadProgress = 0.0; // reset download progress
     notifyListeners();
   }
 

@@ -2,7 +2,6 @@ import 'package:black_belt/Core/Common%20SizedBoxes/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 
 import '../../Core/Provider/vidoeplayprovider.dart';
@@ -41,11 +40,16 @@ class _PackagesScreenState extends State<PackagesScreen> {
                 builder: (context, downloadProvider, child) {
                   if (downloadProvider.downloading) {
                     return Column(
-                      children: const [
-                        LinearProgressIndicator(),
-                        SizedBox(height: 16),
+                      children: [
+                        LinearProgressIndicator(
+                          value: downloadProvider.downloadProgress,
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.blue),
+                          backgroundColor: Colors.blueGrey,
+                        ),
+                        fixheight,
                         Text(
-                          'Downloading Videos...',
+                          "${downloadProvider.downloadProgress.toStringAsFixed(2)} MB Downloaded",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,

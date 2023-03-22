@@ -14,6 +14,7 @@ import 'Feature/Testing/VideoScreen.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return GetMaterialApp(
+          return const GetMaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Black Belt',
             //Calling Screen
