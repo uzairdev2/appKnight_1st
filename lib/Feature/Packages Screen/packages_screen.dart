@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../Core/Provider/vidoeplayprovider.dart';
+import '../VideoPlayerScreen/video_screen_new.dart';
 import 'VideosList_Screen.dart';
 
 class PackagesScreen extends StatefulWidget {
@@ -63,7 +64,15 @@ class _PackagesScreenState extends State<PackagesScreen> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Get.to(() => VideosListScreen());
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => VideoScreen(
+                                  videoUrl: downloadProvider.videos[0].url,
+                                ),
+                              ),
+                            );
+                            // Get.to(() => VideosListScreen());
                           },
                           child: const Text('Open'),
                         ),
@@ -79,7 +88,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
                           },
                           child: Text('Delete'),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.red,
+                            backgroundColor: Colors.red,
                           ),
                         ),
                       ],

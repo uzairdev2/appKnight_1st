@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
@@ -151,19 +152,64 @@ class _VideoScreenState extends State<VideoScreen> {
               children: [
                 CustomListTile(
                   text: "Front",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => VideoScreen(
+                          videoUrl: videoPlayerModel.videos[0].url,
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 CustomListTile(
                   text: "Back",
-                  onTap: () {},
+                  onTap: () {
+                    videoPlayerModel.dispose();
+                    videoPlayerModel.controller.pause();
+                    videoPlayerModel.controller.dispose();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => VideoScreen(
+                          videoUrl: videoPlayerModel.videos[1].url,
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 CustomListTile(
                   text: "Left",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => VideoScreen(
+                          videoUrl: videoPlayerModel.videos[3].url,
+                        ),
+                      ),
+                    );
+                    // Get.to(VideoScreen(
+                    //   videoUrl: videoPlayerModel.videos[3].url,
+                    // ));
+                  },
                 ),
                 CustomListTile(
                   text: "Right",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => VideoScreen(
+                          videoUrl: videoPlayerModel.videos[2].url,
+                        ),
+                      ),
+                    );
+                    // Get.offAll(VideoScreen(
+                    //   videoUrl: videoPlayerModel.videos[2].url,
+                    // ));
+                  },
                 )
               ],
             ),
