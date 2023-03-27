@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../Core/Common SizedBoxes/custom_sizedbox.dart';
@@ -60,7 +60,15 @@ class _VideoScreenState extends State<VideoScreen> {
         );
       }
     });
+
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() {
+        isExpanded = prefs.getBool('isExpanded') ?? false;
+      });
+    });
   }
+
+  bool isExpanded = false;
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -137,6 +145,15 @@ class _VideoScreenState extends State<VideoScreen> {
               leadingIcon: Icons.timeline_outlined,
             ),
             ExpansionTile(
+              initiallyExpanded: isExpanded,
+              onExpansionChanged: (value) async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.setBool('isExpanded', value);
+                setState(() {
+                  isExpanded = value;
+                });
+              },
+              collapsedIconColor: Colors.white,
               trailing: null,
               leading: const Icon(
                 Icons.camera_alt_outlined,

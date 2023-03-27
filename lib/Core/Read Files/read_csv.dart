@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 class CsvService {
   Future<List<List<dynamic>>> processCsv() async {
-    var result = await rootBundle.loadString("assets/file/hrang.csv");
+    var result = await rootBundle.loadString("assets/file/sjirugi.csv");
     return const CsvToListConverter().convert(result, eol: "\n");
   }
 }
