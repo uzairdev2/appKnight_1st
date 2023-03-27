@@ -1,4 +1,5 @@
 import 'package:black_belt/Core/Provider/icon_state.dart';
+import 'package:black_belt/Feature/VideoPlayerScreen/video_screen_new.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +25,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // Hide Status Bar
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom]);
     // Set landscape orientation forcefully
@@ -54,11 +54,27 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return const GetMaterialApp(
+          final videoPlayerModel =
+              Provider.of<VideoPlayerProvider>(context, listen: false);
+          return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Black Belt',
             //Calling Screen
             home: SplashScreen(),
+            routes: {
+              "secondvideo": (context) => VideoScreen(
+                    videoUrl: videoPlayerModel.videos[1].url,
+                  ),
+              "thridvideo": (context) => VideoScreen(
+                    videoUrl: videoPlayerModel.videos[3].url,
+                  ),
+              "forthvideo": (context) => VideoScreen(
+                    videoUrl: videoPlayerModel.videos[2].url,
+                  ),
+              "firstvideo": (context) => VideoScreen(
+                    videoUrl: videoPlayerModel.videos[0].url,
+                  ),
+            },
           );
         },
       ),

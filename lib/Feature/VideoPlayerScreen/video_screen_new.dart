@@ -153,62 +153,70 @@ class _VideoScreenState extends State<VideoScreen> {
                 CustomListTile(
                   text: "Front",
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => VideoScreen(
-                          videoUrl: videoPlayerModel.videos[0].url,
-                        ),
-                      ),
-                    );
+                    // videoPlayerModel.dispose();
+                    videoPlayerModel.controller.pause();
+                    videoPlayerModel.controller.dispose();
+                    Navigator.pushReplacementNamed(context, "firstvideo");
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (BuildContext context) => VideoScreen(
+                    //       videoUrl: videoPlayerModel.videos[0].url,
+                    //     ),
+                    //   ),
+                    // );
                   },
                 ),
                 CustomListTile(
                   text: "Back",
                   onTap: () {
-                    videoPlayerModel.dispose();
+                    // videoPlayerModel.dispose();
                     videoPlayerModel.controller.pause();
                     videoPlayerModel.controller.dispose();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => VideoScreen(
-                          videoUrl: videoPlayerModel.videos[1].url,
-                        ),
-                      ),
-                    );
+                    Navigator.pushNamed(context, "secondvideo");
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (BuildContext context) => VideoScreen(
+                    //       videoUrl: videoPlayerModel.videos[1].url,
+                    //     ),
+                    //   ),
+                    // );
                   },
                 ),
                 CustomListTile(
                   text: "Left",
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => VideoScreen(
-                          videoUrl: videoPlayerModel.videos[3].url,
-                        ),
-                      ),
-                    );
-                    // Get.to(VideoScreen(
-                    //   videoUrl: videoPlayerModel.videos[3].url,
-                    // ));
+                    // videoPlayerModel.dispose();
+                    videoPlayerModel.controller.pause();
+                    videoPlayerModel.controller.dispose();
+
+                    Navigator.pushNamed(context, "thridvideo");
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (BuildContext context) => VideoScreen(
+                    //       videoUrl: videoPlayerModel.videos[3].url,
+                    //     ),
+                    //   ),
+                    // );
                   },
                 ),
                 CustomListTile(
                   text: "Right",
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => VideoScreen(
-                          videoUrl: videoPlayerModel.videos[2].url,
-                        ),
-                      ),
-                    );
-                    // Get.offAll(VideoScreen(
-                    //   videoUrl: videoPlayerModel.videos[2].url,
-                    // ));
+                    Navigator.pushNamed(context, "forthvideo");
+                    // videoPlayerModel.dispose();
+                    videoPlayerModel.controller.pause();
+                    videoPlayerModel.controller.dispose();
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (BuildContext context) => VideoScreen(
+                    //       videoUrl: videoPlayerModel.videos[2].url,
+                    //     ),
+                    //   ),
+                    // );
                   },
                 )
               ],
