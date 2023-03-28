@@ -226,14 +226,6 @@ class _VideoScreenState extends State<VideoScreen> {
                     // videoPlayerModel.dispose();
                     videoPlayerModel.controller.pause();
                     videoPlayerModel.controller.dispose();
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (BuildContext context) => VideoScreen(
-                    //       videoUrl: videoPlayerModel.videos[2].url,
-                    //     ),
-                    //   ),
-                    // );
                   },
                 )
               ],
